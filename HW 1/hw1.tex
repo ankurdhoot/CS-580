@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\begin{document}
+\author{Ankur Dhoot}
+\title{CS 580 HW 1}
+\maketitle
+
+\section*{Q1}
+
+T(n) = $\theta$($n^{log_5 7}$lgn). Using the notation of the master method, a = 7, b = 5 so f(n) = $\theta$($n^{log_5 7}$) putting us in case 2 of the master method. Thus, $n^{log_5 7}$lgn is an asymptotic upper and lower bound on T(n).
+
+\section*{Q2}
+Claim: T(n) $\leq$ 45/8 cn
+
+Proof: By induction on n
+
+Base case: 
+
+T(n) = c $\leq$ 45/8 cn for n $<$ 5
+
+Induction Step: Assume the statement is true for n' $<$ n.
+
+We must show the statement is true for n. 
+
+T(n) = 
+\begin{equation}
+	\begin{aligned}
+    T(\floor*{\frac{2n}{9}}) + 3T(\floor*{\frac{n}{5}}) + cn \\ 
+    \leq a\floor*{\frac{2n}{9}} + 3a\floor*{\frac{n}{5}} + cn \\
+    \leq a2n/9 + 3an/5 + cn \\
+    = an(2/9 + 3/5) + cn \\
+    = an(37/45) + cn = \\
+    37/8cn + cn \\
+    = 45/8cn \\
+    = an
+	\end{aligned}
+\end{equation}
+
+where the second step follows by the induction hypothesis. Thus, by the property of mathematical induction, the statement holds.
+
+\section*{Q3}
+
+\paragraph*{(a)}
+
+Base case: a = 1
+\begin{equation}
+	\begin{aligned}
+H(3)H(n-1) - H(1)H(n-2) - H(2)H(n-3) \\
+= 2H(n-1) - H(n-3) \\
+= H(n)
+	\end{aligned}
+\end{equation}
+so the base case holds.
+
+Induction step: Suppose true for a' $<$ a $<$ n - 2
+
+We want to show the claim holds for a:
+\begin{equation}
+	\begin{aligned} 
+	H(n) = H(a+2)H(n-a) - H(a)H(n-a-1) - H(a+1)H(n-a-2) \\ = [2H(a+1) - H(a-1)]H(n-a) - H(a)H(n-a-1) - H(a+1)H(n-a-2)
+	\\ = H(a+1)[2H(n-a) - H(n-a-2)] - H(a-1)H(n-a) - H(a)H(n-a-1)
+	\\ = H(a+1)H(n-a) - H(a-1)H(n-a) - H(a)H(n-a-1)
+	\\ = H(n)
+	\end{aligned}
+\end{equation}
+where the last step follows with the induction hypothesis applied with a - 1.
+Thus, by the principle of mathematical induction the claim holds. 
+
+\paragraph*{(b)}
+Using a = k-1:
+\begin{equation}
+	\begin{aligned}
+	H(2k) = H(k+1)H(2k-(k-1)) - H(k-1)H(2k-(k-1)-1) - H(k)H(2k-(k-1)-2) 
+ \\= H(k+1)H(k+1) - H(k-1)H(k) - H(k)H(k-1) 
+ \\= H(k+1)H(k+1) - 2H(k)H(k-1)
+ 	\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+	H(2k-1) = H(k+1)H(2k-1-(k-1) - H(k-1)H(2k-1-(k-1)-1) \\
+	- H(k-1+1)H(2k-1-(k-1)-2)
+	\\= H(k+1)H(k) - H(k-1)H(k-1) - H(k)H(k-2)
+	\\= H(k+1)H(k) - H(k-1)H(k-1) - H(k)[2H(k) - H(k+1)]
+	\\=2H(k+1)H(k) - 2H(k)H(k) - H(k-1)H(k-1)
+ 	\end{aligned}
+\end{equation}
+
+\paragraph*{(c)}
+Using a = k-1:
+\begin{equation}
+	\begin{aligned}
+	H(2k+1) = H(k-1+2)H(2k+1-(k-1)) - H(k-1)H(2k+1-(k-1)-1) 
+	\\- H(k-1+1)H(2k+1-(k-1)-2) 
+	\\= H(k+1)H(k+2) - H(k-1)H(k+1) - H(k)H(k) 
+	\\= H(k+1)[2H(k+1) - H(k-1)] - H(k-1)H(k+1) - H(k)H(k)
+	\\= 2H(k+1)H(k+1) - 2H(k+1)H(k-1) - H(k)H(k)
+ 	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+	H(2k-2) = H(k-1+2)H(2k-2-(k-1)) - H(k-1)H(2k-2-(k-1)-1) 
+	\\- H(k-1+1)H(2k-2-(k-1)-2)
+	\\= H(k+1)H(k-1) - H(k-1)H(k-2) - H(k)H(k-3)
+	\\= H(k+1)H(k-1) -H(k-1)[2H(k) - H(k+1)] - H(k)[2H(k-1) - H(k)]
+	\\=2H(k+1)H(k-1) - 4H(k)H(k-1) + H(k)H(k)
+ 	\end{aligned}
+\end{equation}
+
+\paragraph*{(d)}
+\end{document}
