@@ -13,7 +13,9 @@
 
 \section*{Q1}
 
-T(n) = $\theta$($n^{log_5 7}$lgn). Using the notation of the master method, a = 7, b = 5 so f(n) = $\theta$($n^{log_5 7}$) putting us in case 2 of the master method. Thus, $n^{log_5 7}$lgn is an asymptotic upper and lower bound on T(n).
+T(n) = $\theta$($n^{log_5 7}$lgn). Using the notation of the master method, a = 7, b = 5 so f(n) = $\theta$($n^{log_5 7}$) putting us in case 2 of the master method. 
+
+Thus, $n^{log_5 7}$lgn is an asymptotic upper and lower bound on T(n) (i.e $c_{1}$$n^{log_5 7}$lgn $\leq$ T(n) $\leq$ $c_{2}$$n^{log_5 7}$lgn for n $>$ $n_{0}$, it's trivial to see $c_{1}$ = 1/2, $c_{2}$ = 2 and $n_{0}$ = 5 suffice as constants)
 
 \section*{Q2}
 Claim: T(n) $\leq$ 45/8 cn
@@ -114,4 +116,55 @@ Using a = k-1:
 \end{equation}
 
 \paragraph*{(d)}
+The algorithm is fairly straightforward given the recurrence relations in parts (b) and (c). If n is even, we use the recurrence relation for H(n) = H(2k) and call Hopskotchy on k. Else, n is odd, and we use the recurrence relation for H(n) = H(2k-1) and call Hopskotchy on k. Either call will return H(k+1), H(k), H(k-1). We then use the values returned to compute H(n+1), H(n), H(n-1) using the relations in (b) and (c).
+
+\begin{algorithm}
+	\caption{Solving Hopskotchy quickly}
+	\begin{algorithmic}[1]
+	\Function{Hopskotchy}{n}
+	\If {n = 1}
+	\State \Return (1, 0, 0)
+	\EndIf
+	\If {n = 2}
+	\State \Return (2, 1, 0)
+	\EndIf
+	\If {n is even}
+	\State a, b, c = Hopskotchy(n/2)
+	\State H(n-1) = H(2k-1) = 2 * a * b - 2 * b * b
+	\State H(n) = H(2k) = a * a - 2 * b * c
+	\State H(n+1) = H(2k + 1) = 2 * a * a - 2 * a * c - b * b
+	\Else
+	\State a, b, c = Hopskotchy((n+1)/2)
+	\State H(n-1) = H(2k - 2) = 2 * a * c - 4 * b * c + b * b
+	\State H(n) = H(2k - 1) = 2 * a * b - 2 * b * b
+	\State H(n+1) = H(2k) = a * a - 2 * b * c
+	\EndIf
+	\State \Return (H(n+1), H(n), H(n-1))
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\paragraph*{(e)}
+It's clear that for a given value of n, we call Hopskotchy on an argument of at most $\ceil*{n/2}$. After getting, the return value we do a constant amount of multiplications and additions and then return the three values. Thus, the recurrence is 
+
+T(n) $\leq$ = T($\ceil*{n/2}$) + c
+
+which makes T(n) = O(logn) under the uniform cost criterion by the master method.
+
+If we were to use the obvious method, the recurrence would be T(n) = T(n-1) + c which gives us an O(n) bound under the uniform cost criterion. Thus, the smart method is significantly faster (logarithmic vs linear).
+
+We can bound the size of the nth Hopskotchy number by $2^{n}$ (Note that this isn't necessarily a tight bound, but the point is that the size is exponential).
+
+
+Proof: By induction on n
+
+Base case: H(n) $<$ $2^{n}$ for n $\leq$ 3
+
+Induction Step: Suppose true for all n' $<$ n
+
+H(n) = 2H(n-1) - H(n-3) $\leq$ 2H(n-1) $\leq$ 2 * $2^{n-1}$ = $2^{n}$
+
+where the second to last step follows by the induction hypothesis. 
+
+Since log($2^{n}$) = n, we find that the number of bits required to represent the nth Hopskotchy number is O(n). Since we need the n/2th Hopskotchy numbers to compute the nth Hopskotchy number, we get that the cost for fast algorithm under the logarithmic cost criterion is c(n/2 + n/4 + n/8 + ...) $\leq$ 2cn = O(n). If we were to use the obvious method, we use the n-1 and n-3rd number to compute the nth, meaning the cost under the logarithmic cost criterion is c(n-1 + n-2 + n-3 + ....) = O($n^{2}$). Thus, the fast method is significantly better under the logarithmic cost criterion as well (linear vs quadratic).
 \end{document}
