@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.31)  27 JAN 2017 22:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.31)  28 JAN 2017 00:43
 entering extended mode
 **./hw2.tex
 (hw2.tex
@@ -987,7 +987,7 @@ Package pdftex.def Info: points.pdf, page1 used on input line 116.
 Here is how much of TeX's memory you used:
  32364 strings out of 493334
  757534 string characters out of 3127622
- 726783 words of memory out of 3000000
+ 726795 words of memory out of 3000000
  35528 multiletter control sequences out of 15000+200000
  10002 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1010,7 +1010,7 @@ Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
 fonts/cm/cmr9.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts
 /type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Progra
 ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on hw2.pdf (6 pages, 162450 bytes).
+Output written on hw2.pdf (6 pages, 162679 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

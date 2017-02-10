@@ -53,7 +53,7 @@ Runtime: If we think about the recursion tree, the maximum number of nodes in a 
 
 \newpage
 
-Since each level of the recursion tree costs O(n) time independent of the subproblems, T(n) $\leq$ O(nlogr) + $\sum_{i=1}^{logn/r} \frac{n}{2^{i}r} r$ = O(nlogr) + $\sum_{i=1}^{logn/r} \frac{n}{2^{i}}$ O(nlogr) + O(n) = O(nlogr).
+Since the first $\ceil*{logr}$ levels of the recursion tree each cost O(n) time independent of the subproblems, T(n) $\leq$ O(nlogr) + $\sum_{i=1}^{logn/r} \frac{n}{2^{i}r} r$ = O(nlogr) + $\sum_{i=1}^{logn/r} \frac{n}{2^{i}}$ O(nlogr) + O(n) = O(nlogr).
 
 \begin{forest}
   for tree={
@@ -105,7 +105,7 @@ We partition the points into two sets $P_{L}$ and $P_{R}$ using the median x val
 
 We then create the array Y', which contains all points in the 2$\delta$ wide vertical strip centered on the median x value, same as in CLRS 33.4. We now compute the minimum tri-distance in the case that the points cross the partition. 
 
-If the three points, ($p_{i}$, $p_{j}$, $p_{k}$), that comprise the minimum tri-distance cross the partition (i.e trd($p_{i}$, $p_{j}$, $p_{k}$) $<$ $\delta$), it's clear that they must reside in a $\delta$ high rectangle in Y' (same as in CLRS 33.4). The key insight is that for each point $p_{i}$ in Y', we need only check a constant number of ($p_{j}, p_{k}$) inside Y' to find the minimum tri-distance. 
+If the three points, ($p_{i}$, $p_{j}$, $p_{k}$), that comprise the minimum tri-distance cross the partition, it's clear that they must reside in a $\delta$ high rectangle in Y' (since trd($p_{i}$, $p_{j}$, $p_{k}$) $<$ $\delta$). The key insight is that for each point $p_{i}$ in Y', we need only check a constant number of ($p_{j}, p_{k}$) inside Y' to find the minimum tri-distance. 
 
 If we divide a 2$\delta$ wide by $\delta$ high rectangle in Y' into 32 subrectangles of size $\delta$/4 x $\delta$/4, there can be at most 2 points in any subrectangle. Why? If we place three points as far as possible in any subrectangle (as shown below), then the tri-distance is $\delta$/4 + $\delta$/4 + $\sqrt{(\delta/4)^{2} + (\delta/4)^{2}}$ = $\delta$(1/2 + $\sqrt(2)$/4) $<$ $\delta$, a contradiction to how we defined $\delta$. Thus, there can be at most 2 points in any subrectangle. Thus, there can be at most 64 points in any 2$\delta$ x $\delta$ rectangle. 
 
