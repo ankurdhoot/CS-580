@@ -205,7 +205,7 @@ dp[i, j, k, l] =
    \end{cases}
 \]
 
-The above dynamic programming equations use the following convention: We always only take the max over dp[i',j',k',l'] that are defined. If all the dp[i',j',k',l'] values that we are taking the max over are undefined, then dp[i,j,k,l] we define to be undefined (not 0). We do this in order to maintain that l = $|K_{2}| - |K_{1}|$. If we were to let undefined values be 0, we wouldn't be able to distinguish between the cases where we can and cannot achieve differences of l. (e.g if we let the base case be dp[0,j,k,l] = 0 instead of dp[0,j,k,0] = 0, then we wouldn't know that we can't actually achieve a difference of $|l| > 1$ with 0 items even though the equation is well defined)
+The above dynamic programming equations use the following convention: We always only take the max over dp[i',j',k',l'] that are defined. If all the dp[i',j',k',l'] values that we are taking the max over are undefined, then we define dp[i,j,k,l] to be undefined (not 0). We do this in order to maintain that l = $|K_{2}| - |K_{1}|$. If we were to let undefined values be 0, we wouldn't be able to distinguish between the cases where we can and cannot achieve differences of l. (e.g if we let the base case be dp[0,j,k,l] = 0 instead of dp[0,j,k,0] = 0, then we wouldn't know that we can't actually achieve a difference of $|l| > 1$ with 0 items even though the equation is well defined)
 
 There are three options for any item i:
 

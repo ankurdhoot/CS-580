@@ -1,0 +1,191 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{mathtools}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\begin{document}
+\author{Ankur Dhoot}
+\title{CS 580 HW 4}
+\maketitle
+
+\section*{Q1}
+We'll use a balanced search tree (such as a red-black tree) to support the efficient execution of the operations. The keys in the red-black tree will be the car serial numbers. We'll assume that we have car objects that contain the serial number and price as member variables. 
+
+Insert: This is completely straightforwad using the RB-INSERT operation given in CLRS 13.3. We'll assume the tree T is a global variable and already initialized.
+
+To insert, we simply take the serial number and the price, create a car object, and insert it into the tree using RB-INSERT which runs in O(logn). 
+
+To Find-Price, we simply use the normal binary tree search algorithm following an appropriate path from the root to our destination node (if it exists). The height of a red-black tree is O(logn) so Find-Price runs in O(logn).
+
+Since RB-Delete requires a pointer to the node to be deleted, we first find the node in O(logn) and then call RB-Delete which runs in O(logn) for a total deletion run time of O(logn).
+
+To multiply the price of all the cars in a given serial range by a fixed rate, we start at the root and work our way done as follows: If the given node lies within our range, multiply its price by the rate. Then recurse on its left and right child. If a node does not lie within the range, it is either above or below the range. If the node lies below the range, all possible nodes that could lie within the range must be in its right subtree so we recurse on the right child. Analogously if the node lies above the range. It's easy to see this procedure runs in time O(h + m) where h is the height of the tree (O(logn)) and m is the number of nodes that lie within the given range. If the number of nodes within the given range is $\Omega(logn)$, then the runtime is O(m).
+\begin{algorithm}
+	\caption{Insert Car into RB tree}
+	\begin{algorithmic}[1]
+	\Function{insert}{serialNum, price}
+	\State z = new Car
+	\State z.key = serialNum
+	\State z.price = price
+	\State RB-Insert(T, z)
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\begin{algorithm}
+	\caption{Find node given serial number (key)}
+	\begin{algorithmic}[1]
+	\Function{find-node}{numb}
+	\State x = T.root
+	\While {x $\neq$ NIL and numb $\neq$ x.key}
+		\If {numb $<$ x.key}
+			\State x = x.left
+		\Else x = x.right
+		\EndIf
+	\EndWhile
+	\State return x
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+	\begin{algorithm}
+	\caption{Find Car Price}
+	\begin{algorithmic}[1]
+	\Function{find-price}{numb}
+	\State x = find-node(numb)
+	\State return x.price
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\begin{algorithm}
+	\caption{Delete Car from RB tree}
+	\begin{algorithmic}[1]
+	\Function{delete}{numb}
+	\State z = find-node(numb)
+	\State RB-Delete(T, z)
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+ 
+\begin{algorithm}
+	\caption{Insert Car into RB tree}
+	\begin{algorithmic}[1]
+	\Function{mult-price}{rate, numb1, numb2}
+	x = T.root
+	mult-price(x, rate, numb1, numb2)
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}	
+
+\begin{algorithm}
+	\caption{Multiply price of cars in RB-Tree}
+	\begin{algorithmic}[1]
+	\Function{mult-price}{x, rate, numb1, numb2}
+	\If {x == NIL} \State return
+	\EndIf
+	\If {numb1 $\leq$ x.key $\leq$ numb2}
+		\State x.price = x.price * rate
+		\State mult-price(x.left, numb1, numb2)
+		\State mult-price(x.right, numb1, numb2)
+	\ElsIf {x.key $<$ numb1}
+		\State mult-price(x.right, numb1, numb2)
+	\Else 
+		\State mult-price(x.left, numb1, numb2)
+	\EndIf
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\section*{Q2}
+We can solve this problem in constant amortized time using a stack and a deque where the underlying implementation of the deque supports insertion / deletion at either end in O(1) (e.g using a doubly linked list). The tricky part comes in maintaining the task with the minimum id among all the tasks remaining in the list. We do this by using a stack with the following invariant: The task at the top of the stack is the task with minimum id among all elements remaining in the list.
+
+To maintain this invariant, we do the following: Every time a new task is inserted into the deque, either at the left or the right end, we check if the id for that task is less than the current minimum (which is at the top of the stack). If so, we push that task onto the stack. When deleting from the linked-list, we check if the element being deleted has the minimum id among all elements in the list. If so, we pop that task from the stack and the new task at the top of the stack now has the minimum id among all remaining tasks in the list.
+
+
+Let $\phi(D_{i})$ denote the number of elements in the stack at the ith step. Then $\phi(D_{0})$ = 0 and $\phi(D_{i}) \geq 0$ for all i.
+
+The amortized cost for insert-left or insert-right:
+
+$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ is at most O(1)+ O(1) = O(1) since $\phi(D_{i})$ - $\phi(D_{i-1})$ is O(1) (we can only add at most one element from the stack in which case $\phi(D_{i})$ - $\phi(D_{i-1})$ = 1)
+
+The amortized cost for delete-left or delete-right:
+
+$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ $\leq$ O(1) (if we remove an element from the stack $\phi(D_{i})$ - $\phi(D_{i-1}) = -1$ else 0).
+
+The amortized cost for identify-min:
+
+$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ = $c_{i}$ = O(1) ($\phi(D_{i})$ - $\phi(D_{i-1})$ = 0 since we don't add or remove from the stack)
+
+Thus, all operations can be supported in constant time.
+
+ 
+In the following algorithms, we assume that a stack s and deque dq have been initialized.
+\begin{algorithm}
+	\begin{algorithmic}[1]
+	\Function{insert-left}{x}
+	\If {! s.isEmpty() }
+		\If {x.id $<$ s.peek().id} 
+			\State s.push(x)
+		\EndIf
+	\Else {}   \Comment {No items in list}
+		\State s.push(x)
+	\EndIf
+	\State dq.addFirst(x)
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\begin{algorithm}
+	\begin{algorithmic}[1]
+	\Function{insert-right}{x}
+	\If {! s.isEmpty() }
+		\If {x.id $<$ s.peek().id} 
+			\State s.push(x)
+		\EndIf
+	\Else {}   \Comment {No items in list}
+		\State s.push(x)
+	\EndIf
+	\State dq.addLast(x)
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+
+\begin{algorithm}
+	\begin{algorithmic}[1]
+	\Function{delete-left}{}
+	\If {! dq.isEmpty() }
+		\State x = dq.removeFirst()
+		\If {x == s.peek()} 
+		\State s.pop()
+		\EndIf
+		\State \Return x
+	\EndIf
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\begin{algorithm}
+	\begin{algorithmic}[1]
+	\Function{delete-right}{}
+	\If {! dq.isEmpty() }
+		\State x = dq.removeLast()
+		\If {x == s.peek()} 
+		\State s.pop()
+		\EndIf
+		\State \Return x
+	\EndIf
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+	
+\begin{algorithm}
+	\caption{Return pointer to task with min id among all tasks in list}
+	\begin{algorithmic}[1]
+	\Function{identify-min}{x}
+	\State return s.peek()
+	\EndFunction
+	\end{algorithmic}
+	\end{algorithm}
+\end{document}
