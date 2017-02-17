@@ -108,15 +108,15 @@ Let $\phi(D_{i})$ denote the number of elements in the stack at the ith step. Th
 
 The amortized cost for insert-left or insert-right:
 
-$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ is at most O(1)+ O(1) = O(1) since $\phi(D_{i})$ - $\phi(D_{i-1})$ is O(1) (we can only add at most one element from the stack in which case $\phi(D_{i})$ - $\phi(D_{i-1})$ = 1)
+$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ is at most 1 + 1 = O(1) since $\phi(D_{i})$ - $\phi(D_{i-1})$ is O(1) (we can only add at most one element from the stack in which case $\phi(D_{i})$ - $\phi(D_{i-1})$ = 1)
 
 The amortized cost for delete-left or delete-right:
 
-$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ $\leq$ O(1) (if we remove an element from the stack $\phi(D_{i})$ - $\phi(D_{i-1}) = -1$ else 0).
+$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ $\leq$ 1 (if we remove an element from the stack $\phi(D_{i})$ - $\phi(D_{i-1}) = -1$ else 0).
 
 The amortized cost for identify-min:
 
-$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ = $c_{i}$ = O(1) ($\phi(D_{i})$ - $\phi(D_{i-1})$ = 0 since we don't add or remove from the stack)
+$\hat{c_{i}}$ = $c_{i}$ + $\phi(D_{i})$ - $\phi(D_{i-1})$ = $c_{i}$ = 1 ($\phi(D_{i})$ - $\phi(D_{i-1})$ = 0 since we don't add or remove from the stack)
 
 Thus, all operations can be supported in constant time.
 
