@@ -1,0 +1,53 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{amssymb}
+\usepackage{forest}
+\begin{document}
+\author{Ankur Dhoot}
+\title{CS 580 HW 5}
+\maketitle
+
+\section*{Q1}
+
+\paragraph*{(a)}
+
+We'll give an O($E^{2}$) time algorithm for constructing a valid overflow in G. We'll iteratively find an edge which doesn't satisfy the lower bound (i.e f(u,v) $<$ l(u,v)). Let $c_{P}$ = l(u, v) - f(u,v) for the edge u-v not satisfying the lower bound. Then, we'll find a path from s to u and v to t in G. This can be done in O(E) time using BFS or DFS to find the s-u path and then the v-t path. Then, for all edges on that path, we'll increase the flow value of each edge by $c_{P}$. After we've increased the flow, edge (u,v) now satisfies the lower bound as do all edges that previously had satisfied the lower bound. 
+
+Each iteration runs in O(E) time. Since there are E edges, and at least one more edge satisfies the lower bound after each iteration, we iterate at most O(E) times. Thus, the total running time is O($E^{2}$).
+
+\paragraph*{(b)}
+We'll reduce the minimum flow problem given an overflow to a maximum flow problem.
+
+Let f be a valid overflow in G. Consider $G_{f}'$. If (u,v) $\in$ E, let c(u,v) = $\infty$ (since edges don't have restrictions on the maximum amount of flow that can be pushed through them). If (u,v) $\in$ E and f(u,v) > l(u,v), let c(v, u) = f(u,v) - l(u,v) (i.e the maximum amount possible by which we can reduce f(u,v) while maintaining a valid overflow). Let s' = t, and t' = s. Let f' be the maximum s'-t' flow in $G_{f}'$. It's clear that if we update our original overflow using this max flow by letting $f^{*}$(u,v) = f(u,v) + f'(u,v) - f'(v,u), the the flow $f^{*}$ is a minimum flow in G. 
+
+Since we can construct $G_{f}'$ in O(V + E) time and we can find the maximum flow $G_{f}'$ in O($VE^{2}$) time using Edmonds-Karp, we can find the minimum flow in O($VE^{2}$) by the above method.
+
+\paragraph*{(c)}
+(1) $\Rightarrow$ (2): Suppose for the sake of contradiction the f is a minimum flow in G but that $G_{f}'$ contains a path from s' to t', say P. Consider the capacities added to $G_{f}'$ as in (b). Then, there exists some minimum capacity edge along P. If we augment the flow from s' to t' along path P by this minimum capacity, the resulting flow is a valid overflow and of lesser flow value, a contradiction. Thus, there can exist no path from s' to t' in $G_{f}'$. 
+
+(2) $\Rightarrow$ (3): Suppose that $G_{f}'$ contains no path from s' to t'. Let T = \{v $\in$ V: there exists a path from s' to v in $G_{f}'$\}. Let S = V - T. The partition (S, T) is a cut since s'=t $\in$ T and t'=s $\in$ S because there is no s' to t' path in $G_{f}'$. Now consider a pair of vertices u $\in$ S and v $\in$ T. If (v,u) $\in$ E, then (v,u) $\in$ $E_{f}'$. But then u $\in$ T, a contradiction. Thus (u,v) $\not\in$ E. If (u,v) $in$ E, we must have f(u,v) = l(u,v) otherwise f(u,v) > l(u,v) meaning (v,u) $in$ $E_{f}'$ which would place u $\in$ T, a contradiction. 
+
+Thus, the cut above has no edges from T to S in G, and for any edge (u,v), we have f(u,v) = l(u,v). Thus, $|f|$ = l(S,T) for some (S,T) cut having no edges from T to S.
+
+(3) $\Rightarrow$ (1): Suppose $|f|$ = l(S,T) for some (S,T) cut having no edges from T to S. 
+
+Claim: $|f|$ $\geq$ l(S,T) for any (S,T) cut having no edges from T to S. 
+
+Proof: $|f|$ = f(S,T) 
+
+= $\sum\limits_{u \in S}\sum\limits_{v \in T} f(u,v)$ - $\sum\limits_{u \in S}\sum\limits_{v \in T} f(v,u)$
+
+= $\sum\limits_{u \in S}\sum\limits_{v \in T} f(u,v)$
+
+$\geq$ $\sum\limits_{u \in S}\sum\limits_{v \in T} l(u,v)$
+
+= l(S,T)
+
+
+Thus, since $|f|$ $\geq$ l(S,T) for any (S,T) cut having no edges from T to S, and by hypothesis we have that $|f|$ = l(S,T) for some (S,T) cut having no edges from T to S $\Rightarrow$ f is a minimum flow.
+
+\end{document}

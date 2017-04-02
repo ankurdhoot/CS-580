@@ -99,7 +99,7 @@ To multiply the price of all the cars in a given serial range by a fixed rate, w
 	\end{algorithm}
 	
 \section*{Q2}
-We can solve this problem in constant amortized time using a stack and a deque where the underlying implementation of the deque supports insertion / deletion at either end in O(1) (e.g using a doubly linked list). The tricky part comes in maintaining the task with the minimum id among all the tasks remaining in the list. We do this by using a stack with the following invariant: The task at the top of the stack is the task with minimum id among all elements remaining in the list.
+We can solve this problem in constant amortized time using a stack and a deque where the underlying implementation of the deque supports insertion / deletion at either end in O(1) (e.g using a single doubly linked list) (the LinkedList class in Java is such an implementation of a deque). The tricky part comes in maintaining the task with the minimum id among all the tasks remaining in the list. We do this by using a stack with the following invariant: The task at the top of the stack is the task with minimum id among all elements remaining in the list.
 
 To maintain this invariant, we do the following: Every time a new task is inserted into the deque, either at the left or the right end, we check if the id for that task is less than the current minimum (which is at the top of the stack). If so, we push that task onto the stack. When deleting from the linked-list, we check if the element being deleted has the minimum id among all elements in the list. If so, we pop that task from the stack and the new task at the top of the stack now has the minimum id among all remaining tasks in the list.
 
