@@ -1,0 +1,76 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\begin{document}
+\author{Ankur Dhoot}
+\title{CS 580 HW 6}
+\maketitle
+
+\section*{Q1}
+We'll use an adversary similar to the one used in the element uniqueness problem. 
+
+We'll group the n numbers in our set X = \{$v_{1},...,v_{n}$\} into groups of 2 and 3 subject to minimizing the absolute difference between the number of groups of 2 and the number of groups of 3.
+
+Since n $>$ 6, we are guaranteed to have at least one group of 3 and one group of 2 in such a grouping. For example: n = 7 = 2 + 3 + 2 or n = 8 = 3 + 2 + 3 or n = 9 = 2 + 3 + 2 + 2 or n = 10 = 3 + 2 + 3 + 2 or n = 11 = 3 + 2 + 3 + 3.
+
+It's not difficult to see that the groupings can be made such that there at least $\floor{n/6}$ groups of 2 and at least $\floor{n/6}$ groups of 3. 
+
+The adversary will assume that both numbers in a group of 2 are equal and all three numbers in a group of 3 are equal. We'll prove a lower bound on the number of comparisons required between numbers in different groups, which is obviously then a lower bound on the total number of comparisons any algorithm must do. 
+
+All numbers will lie in the interval (0,1]. Let ($a_{i}, b_{i}$] denote the interval in which the numbers in the ith group can lie. Initially, ($a_{i}, b_{i}$] = (0,1] for all groups.
+
+The adversary will do the following when the algorithm asks for a comparison between $v_{i}$ and $v_{j}$:
+
+If $v_{i}$ and $v_{j}$ are in the same group, return that $v_{i} = v_{j}$.
+
+Else, let $m_{i} = \dfrac{a_{i} + b_{i}}{2}$ and let $m_{j} = \dfrac{a_{j} + b_{j}}{2}$ where ($a_{i}, b_{i}$] is the interval of the group to which $v_{i}$ belongs and ($a_{j}, b_{j}$] is the interval of the group to which $v_{j}$ belongs.
+
+If $m_{i} \leq m_{j}$, then let $b_{i} = m_{i}$ and let $a_{j} = m_{j}$. Answer $v_{i} < v_{j}$.
+
+Else, let $a_{i} = m_{i}$ and let $b_{j} = m_{j}$. Answer $v_{i} > v_{j}$. 
+
+Thus, whenever we compare numbers in different groups, the intervals corresponding to each group is halved.  \newline
+
+Claim: If the algorithm halts before all groups of 2 have pairwise non-overlapping intervals or before all groups of 3 have pairwise non-overlapping intervals, then the algorithm is not correct. 
+
+Proof: Suppose the algorithm halts, but there exist a pair of overlapping intervals corresponding to groups of 2. Let T = algorithm answers that every distinct value in X occurs a number of times that is prime and there are at least two different multiplicities of the numbers in X. Let F = algorithm answers otherwise. 
+
+If the algorithm returns T, consider one of the pair of overlapping intervals, ($a_{i}, b_{i}$] and ($a_{j}, b_{j}$] corresponding to elements \{$v_{i_{1}}, v_{i_{2}}$\} and \{$v_{j_{1}}, v_{j_{2}}$\}, respectively. If, we let $v_{i_{1}} = v_{i_{2}} = v_{j_{1}} = v_{j_{2}}$, and let all other groups have distinct numbers (i.e the numbers inside each group are the same, as assumed, but no two groups have the same numbers), then we're left with a bunch of numbers that occur exactly two times, a bunch of numbers that occur exactly three times, and one number that occurs exactly four times (since $v_{i_{1}} = v_{i_{2}} = v_{j_{1}} = v_{j_{2}}$). But four is not a prime number, so the algorithm has failed. 
+
+If the algorithm returns F, then we can just let ALL groups have distinct numbers. We are left with a bunch of numbers that occur exactly twice and a bunch of numbers that occur exactly thrice. Since two and three are prime numbers and not equal to each other, the algorithm should have returned T, so the algorithm has failed. 
+
+An analagous analysis holds if the algorithm halts before all groups of 3 have pairwise non-overlapping intervals. \newline
+
+Thus, at the end, the groups of 2 have pairwise non-overlapping intervals and the groups of 3 have pairwise non-overlapping intervals. This implies that the sum of the interval lengths of groups of 2 is $\leq$ 1 as is the sum of the interval lengths of groups of 3.
+
+Letting $l_{i}$ denote the length of interval ($a_{i}, b_{i}$] at the end, we have that 
+$\sum l_{i} \leq$ 2. Since $l_{i} = (1/2)^{c_{i}}$ where $c_{i}$ is the number of comparisons in which elements of group i were compared to elements of some other group, we have $\sum (1/2)^{c_{i}} \leq$ 2.
+
+Let k denote the number of groups. Since there at least $\floor{n/6}$ groups of 2 and $\floor{n/6}$ groups of 3, $k \geq 2\floor{n/6}$. From the proof in class, $c_{1} + c_{2} + ... + c_{k}$ is minimized subject to the constraint $\sum (1/2)^{c_{i}}$ = some constant (in this case, some constant $\leq$ 2) when $c_{1} = c_{2} = ... = c_{k}$. When $\sum\limits_{i=1}^{k} c_{i}$ is minimized, we can deduce that $(1/2)^{c_{i}} \leq 2/k \Rightarrow c_{i} \geq \log_2 k/2 \geq \log_2 \floor{n/6}$. Thus, $\sum\limits_{i=1}^{k} c_{i} \geq k \log_2 \floor{n/6} \geq 2\floor{n/6}\log_2 \floor{n/6}$ meaning any correct algorithm must make $\Omega(nlogn)$ comparisons.
+
+
+\section*{Q2}
+
+We'll reduce the element uniqueness problem to the minimum tri-distance problem in O(n) time. Since we have already established that element uniqueness requires $\Omega(nlogn)$ time in the ACT model, the minimum tri-distance problem must take $\Omega(nlogn)$ time in the ACT model.
+
+Let X = \{$v_{1},...,v_{n}$\} denote a set of n numbers. Let Y = \{$(v_{1}, 0),...,(v_{n}, 0)$\} be a set of n points corresponding to X (each y coordinate is set to 0). Let Z =  \{$(v_{1}, 0), (v_{1}, 0)...,(v_{n}, 0), (v_{n}, 0)$\} be the set of 2n points where each point in Y has been repeated twice.  \newline
+
+Claim: All numbers in X are unique if and only if the minimum tri-distance of points in Z is $>$ 0. 
+
+Proof: 
+
+($\Rightarrow$) Suppose all the numbers in X are unique. Then, no two points in Y are the same. Thus, every point in Z occurs exactly twice. Since no point in Z occurs three times, the minimum tri-distance must be $<$ 0.
+
+($\Leftarrow$) Suppose the minimum tri-distance of points in Z is $>$ 0. Then, no three points in Z can be the same, otherwise the minimum tri-distance would be 0. Thus, all points in Y must be unique (Suppose not, then Y must contain at least two of the same points $\Rightarrow$ Z must contain at least four of the same points $\Rightarrow$ minimum tri-distance in Z is 0, a contradiction). If all points in Y are unique, it's obvious that all numbers in X are unique. \newline
+
+Given an input X = \{$v_{1},...,v_{n}$\} to the element uniqueness problem, we can clearly construct Z =  \{$(v_{1}, 0), (v_{1}, 0)...,(v_{n}, 0), (v_{n}, 0)$\} in O(n) time. We'll use Z as the input to the minimum tri-distance problem. Using the above claim, we'll check the minimum tri-distance, $\delta$. If $\delta$ = 0, then not all numbers in X are unique. Otherwise, all numbers in X are unique. Thus, once given $\delta$, we can answer the element uniqueness problem in O(1) time. 
+
+Thus, since we can create the input to the minimum tri-distance problem in O(n) time and use the answer to the minimum tri-distance to answer element uniqueness in O(1) time, the minimum tri-distance must take $\Omega(nlogn)$ in the ACT model since element uniqueness requires $\Omega(nlogn)$ time in the ACT model. 
+ 
+\end{document}
