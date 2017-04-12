@@ -21,7 +21,7 @@ Since n $>$ 6, we are guaranteed to have at least one group of 3 and one group o
 
 It's not difficult to see that the groupings can be made such that there at least $\floor{n/6}$ groups of 2 and at least $\floor{n/6}$ groups of 3. 
 
-The adversary will assume that both numbers in a group of 2 are equal and all three numbers in a group of 3 are equal. We'll prove a lower bound on the number of comparisons required between numbers in different groups, which is obviously then a lower bound on the total number of comparisons any algorithm must do. 
+The adversary will assume that both numbers in a group of 2 are equal and all three numbers in a group of 3 are equal. We'll prove a lower bound on the number of comparisons required between numbers in different groups, which is obviously then a lower bound on the total number of comparisons required. 
 
 All numbers will lie in the interval (0,1]. Let ($a_{i}, b_{i}$] denote the interval in which the numbers in the ith group can lie. Initially, ($a_{i}, b_{i}$] = (0,1] for all groups.
 
@@ -35,19 +35,19 @@ If $m_{i} \leq m_{j}$, then let $b_{i} = m_{i}$ and let $a_{j} = m_{j}$. Answer 
 
 Else, let $a_{i} = m_{i}$ and let $b_{j} = m_{j}$. Answer $v_{i} > v_{j}$. 
 
-Thus, whenever we compare numbers in different groups, the intervals corresponding to each group is halved.  \newline
+Thus, whenever we compare numbers in different groups, the interval corresponding to each group is halved.  \newline
 
 Claim: If the algorithm halts before all groups of 2 have pairwise non-overlapping intervals or before all groups of 3 have pairwise non-overlapping intervals, then the algorithm is not correct. 
 
 Proof: Suppose the algorithm halts, but there exist a pair of overlapping intervals corresponding to groups of 2. Let T = algorithm answers that every distinct value in X occurs a number of times that is prime and there are at least two different multiplicities of the numbers in X. Let F = algorithm answers otherwise. 
 
-If the algorithm returns T, consider one of the pair of overlapping intervals, ($a_{i}, b_{i}$] and ($a_{j}, b_{j}$] corresponding to elements \{$v_{i_{1}}, v_{i_{2}}$\} and \{$v_{j_{1}}, v_{j_{2}}$\}, respectively. If, we let $v_{i_{1}} = v_{i_{2}} = v_{j_{1}} = v_{j_{2}}$, and let all other groups have distinct numbers (i.e the numbers inside each group are the same, as assumed, but no two groups have the same numbers), then we're left with a bunch of numbers that occur exactly two times, a bunch of numbers that occur exactly three times, and one number that occurs exactly four times (since $v_{i_{1}} = v_{i_{2}} = v_{j_{1}} = v_{j_{2}}$). But four is not a prime number, so the algorithm has failed. 
+If the algorithm returns T, consider one of the pair of overlapping intervals, ($a_{i}, b_{i}$] and ($a_{j}, b_{j}$] corresponding to elements \{$v_{i_{1}}, v_{i_{2}}$\} and \{$v_{j_{1}}, v_{j_{2}}$\}, respectively. If, we let $v_{i_{1}} = v_{i_{2}} = v_{j_{1}} = v_{j_{2}}$, and let all other groups have distinct numbers (i.e the numbers inside each group are the same, as assumed, but no two groups have the same numbers other than the ith and jth group), then we have one number in X that occurs exactly four times (since $v_{i_{1}} = v_{i_{2}} = v_{j_{1}} = v_{j_{2}}$). But four is not a prime number, so the algorithm has failed. 
 
-If the algorithm returns F, then we can just let ALL groups have distinct numbers. We are left with a bunch of numbers that occur exactly twice and a bunch of numbers that occur exactly thrice. Since two and three are prime numbers and not equal to each other, the algorithm should have returned T, so the algorithm has failed. 
+If the algorithm returns F, then we can just let ALL groups have distinct numbers. We are left with at least one number that occurs exactly twice and at least one number that occurs exactly thrice (since n $>$ 6 and there are at least $\floor{n/6}$ groups of 2 and at least $\floor{n/6}$ groups of 3). Since two and three are prime numbers and not equal to each other, the algorithm should have returned T, so the algorithm has failed. 
 
 An analagous analysis holds if the algorithm halts before all groups of 3 have pairwise non-overlapping intervals. \newline
 
-Thus, at the end, the groups of 2 have pairwise non-overlapping intervals and the groups of 3 have pairwise non-overlapping intervals. This implies that the sum of the interval lengths of groups of 2 is $\leq$ 1 as is the sum of the interval lengths of groups of 3.
+Thus, at the end, the groups of 2 must have pairwise non-overlapping intervals and the groups of 3 must have pairwise non-overlapping intervals. This implies that the sum of the interval lengths of groups of 2 is $\leq$ 1 as is the sum of the interval lengths of groups of 3.
 
 Letting $l_{i}$ denote the length of interval ($a_{i}, b_{i}$] at the end, we have that 
 $\sum l_{i} \leq$ 2. Since $l_{i} = (1/2)^{c_{i}}$ where $c_{i}$ is the number of comparisons in which elements of group i were compared to elements of some other group, we have $\sum (1/2)^{c_{i}} \leq$ 2.
@@ -57,7 +57,7 @@ Let k denote the number of groups. Since there at least $\floor{n/6}$ groups of 
 
 \section*{Q2}
 
-We'll reduce the element uniqueness problem to the minimum tri-distance problem in O(n) time. Since we have already established that element uniqueness requires $\Omega(nlogn)$ time in the ACT model, the minimum tri-distance problem must take $\Omega(nlogn)$ time in the ACT model.
+We'll reduce the element uniqueness problem to the minimum tri-distance problem in O(n) time. Since we have already established that element uniqueness requires $\Omega(nlogn)$ time in the ACT model, the minimum tri-distance problem must take $\Omega(nlogn)$ time in the ACT model (otherwise we can solve element uniqueness faster than nlogn which would be a contradiction).
 
 Let X = \{$v_{1},...,v_{n}$\} denote a set of n numbers. Let Y = \{$(v_{1}, 0),...,(v_{n}, 0)$\} be a set of n points corresponding to X (each y coordinate is set to 0). Let Z =  \{$(v_{1}, 0), (v_{1}, 0)...,(v_{n}, 0), (v_{n}, 0)$\} be the set of 2n points where each point in Y has been repeated twice.  \newline
 
@@ -65,7 +65,7 @@ Claim: All numbers in X are unique if and only if the minimum tri-distance of po
 
 Proof: 
 
-($\Rightarrow$) Suppose all the numbers in X are unique. Then, no two points in Y are the same. Thus, every point in Z occurs exactly twice. Since no point in Z occurs three times, the minimum tri-distance must be $<$ 0.
+($\Rightarrow$) Suppose all the numbers in X are unique. Then, no two points in Y are the same. Thus, every point in Z occurs exactly twice. Since no point in Z occurs three times, the minimum tri-distance must be $>$ 0.
 
 ($\Leftarrow$) Suppose the minimum tri-distance of points in Z is $>$ 0. Then, no three points in Z can be the same, otherwise the minimum tri-distance would be 0. Thus, all points in Y must be unique (Suppose not, then Y must contain at least two of the same points $\Rightarrow$ Z must contain at least four of the same points $\Rightarrow$ minimum tri-distance in Z is 0, a contradiction). If all points in Y are unique, it's obvious that all numbers in X are unique. \newline
 

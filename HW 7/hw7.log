@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.31)  5 APR 2017 00:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.31)  12 APR 2017 03:42
 entering extended mode
-**./hw6.tex
-(hw6.tex
+**./hw7.tex
+(hw7.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
 
@@ -235,21 +235,21 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_intertext_sep=\dimen122
 \l_MT_above_shortintertext_sep=\dimen123
 \l_MT_below_shortintertext_sep=\dimen124
-) (hw6.aux)
-\openout1 = `hw6.aux'.
+) (hw7.aux)
+\openout1 = `hw7.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
 
 ("C:\Users\Ankur Dhoot\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-
 pdf.mkii"
@@ -332,13 +332,13 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 xetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 13.
+LaTeX Font Info:    Try loading font information for U+msa on input line 11.
 
 ("C:\Users\Ankur Dhoot\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\ums
 a.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 13.
+LaTeX Font Info:    Try loading font information for U+msb on input line 11.
 
 ("C:\Users\Ankur Dhoot\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\ums
 b.fd"
@@ -352,63 +352,34 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 18.
+ [1
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-
- []
-
-[1
-
-{C:/Users/Ankur Dhoot/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
-
- []
-
-[2]
-Overfull \hbox (4.47778pt too wide) in paragraph at lines 62--63
-[]\OT1/cmr/m/n/10.95 Let X = \OMS/cmsy/m/n/10.95 f$\OML/cmm/m/it/10.95 v[]; :::
-; v[]$\OMS/cmsy/m/n/10.95 g \OT1/cmr/m/n/10.95 de-note a set of n num-bers. Let
- Y = \OMS/cmsy/m/n/10.95 f$\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 v[]; \OT1/cm
-r/m/n/10.95 0)\OML/cmm/m/it/10.95 ; :::; \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.9
-5 v[]; \OT1/cmr/m/n/10.95 0)$\OMS/cmsy/m/n/10.95 g
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
-
- []
-
-[3] (hw6.aux) ) 
+{C:/Users/Ankur Dhoot/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] (
+hw7.aux) ) 
 Here is how much of TeX's memory you used:
- 4248 strings out of 493334
- 62329 string characters out of 3127622
- 132774 words of memory out of 3000000
- 7704 multiletter control sequences out of 15000+200000
+ 4232 strings out of 493334
+ 62038 string characters out of 3127622
+ 132370 words of memory out of 3000000
+ 7688 multiletter control sequences out of 15000+200000
  10737 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,6n,39p,706b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Ankur Dhoot/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Use
-rs/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmmi6.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ankur Dhoot/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Anku
-r Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.
-pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr6.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Ankur Dhoot/AppData/Local/Progr
-ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on hw6.pdf (3 pages, 119690 bytes).
+ 40i,6n,39p,776b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmbx12.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Ankur Dhoot/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/An
+kur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
+8.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Ankur Dhoot/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Ankur Dho
+ot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C
+:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on hw7.pdf (2 pages, 105113 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
+ 49 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

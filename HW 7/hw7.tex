@@ -1,0 +1,36 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\begin{document}
+\author{Ankur Dhoot}
+\title{CS 580 HW 7}
+\maketitle
+
+\section*{Q1}
+It's obvious that Enormous-Cut $\in$ NP, since given a certificate, we can easily check the certificate in polynomial time (just sum up the edge weights for edges with one endpoint in U and the other endpoint not in U and check whether the sum is $\geq$ K).
+
+We'll reduce Set-Partition to Enormous-Cut thereby proving Enormous-Cut to be NP-Hard. We already showed Enormous-Cut $in$ NP, so together we'll have that Enormous-Cut is NPC.
+
+Let R = \{$r_{1},r_{2},...r_{n}$\} be an instance of Set-Partition (i.e a set of positive integers). We'll construct a graph G such that R contains a valid partition if and only if G contains a subset of vertices, U, s.t c(U) = $(\sum\limits_{u \in U} r_{u})^{2}$ where c(U) denotes the sum of the weights of the edges with one endpoint in U and the other not in U and $r_{u}$ denotes the uth integer in R.
+
+We construct G as follows: 
+
+Let G be the complete graph on n vertices, one vertex for each integer in R (i.e the ith integer in R corresponds to the ith vertex in G). Then, let $w_{ij}$, the weight between vertex i and vertex j (i $\neq$ j), be $r_{i}*r_{j}$.
+
+Claim: R contains a valid partition if and only if G contains a subset of vertices, U, s.t c(U) = $(\sum\limits_{u \in U} r_{u})^{2}$
+
+Proof:
+
+($\Rightarrow$) Suppose R has a valid partition. That is, there exists some subset of R, S, s.t $\sum\limits_{r \in S} r = \sum\limits_{r \in R - S} r$. Consider the corresponding subset of vertices, U, in G. We then have that c(U) = $\sum\limits_{u \in U} \sum\limits_{v \in V - U} r_{u}r_{v}$ = $\sum\limits_{u \in U} r_{u} \sum\limits_{v \in V - U} r_{v}$ = $(\sum\limits_{u \in U} r_{u})^{2}$ since $\sum\limits_{u \in U} r_{u} = \sum\limits_{v \in V - U} r_{v}$. 
+
+($\Leftarrow$) Suppose G contains a subset of vertices, U, s.t c(U) = $(\sum\limits_{u \in U} r_{u})^{2}$. By definition, c(U) = $\sum\limits_{u \in U} \sum\limits_{v \in V - U} r_{u}r_{v}$ which by hypothesis equals $(\sum\limits_{u \in U} r_{u})^{2}$. Thus, we have $\sum\limits_{u \in U} \sum\limits_{v \in V - U} r_{u}r_{v} - (\sum\limits_{u \in U} r_{u})^{2} = 0 \Rightarrow \sum\limits_{u \in U} r_{u} (\sum\limits_{v \in V - U} r_{v} - \sum\limits_{u \in U} r_{u}) = 0 \Rightarrow \sum\limits_{v \in V - U} r_{v} - \sum\limits_{u \in U} r_{u} = 0$ since $\sum\limits_{u \in U} r_{u} > 0 \Rightarrow \sum\limits_{u \in U} r_{u} = \sum\limits_{v \in V - U} r_{v}$. Let S be the subset of integers in R corresponding to U, and we have the desired conclusion. 
+
+(Note: Technically, Enormous-Cut answers the question "Is c(U) $\geq$ K?" instead of "Is c(U) = K?", but if we just ask "Is c(U) $\geq$ K?" and "Is c(U) $\geq$ K + 1?", and the answer to the former is yes, but the answer to the latter is no, then that means c(U) = K)
+
+\section*{Q2}
+
+\end{document}
